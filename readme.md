@@ -9,7 +9,7 @@ and [gulp](http://gulpjs.com/) installed on your local machine and ready to go.
 - Clone this repository (`git clone git@github.com:svenluijten/sapp-api`)
 - Navigate to the repository (`cd sapp-api`)
 - Install composer dependencies (`composer install`)
-- Pull down the Node dependencies (`node install`)
+- Pull down the Node dependencies (`npm install`)
 - Create an `.env` file (`cp .env.example .env`)
 - Fill the `.env` file with your credentials.
 - Generate a unique encryption key (`php artisan key:generate`)
