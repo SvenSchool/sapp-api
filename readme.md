@@ -20,4 +20,3 @@ or simply run `php artisan serve` to boot up a server.
 
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
-View the license [here](LICENSE.md).
