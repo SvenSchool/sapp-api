@@ -37,6 +37,16 @@
             .sub-title {
                 font-size: 36px;
             }
+
+            .sub-title a {
+                color: #898989;
+                text-decoration: none;
+                border-bottom: 1px dotted #444444;
+            }
+
+            .sub-title a:hover {
+                color: #444444;
+            }
         </style>
     </head>
     <body>
@@ -44,7 +54,7 @@
             <div class="content">
                 <div class="title">Laravel 5</div>
                 <div class="sub-title">
-                    <a href="https://github.com/svenluijten/sapp-api">https://github.com/svenluijten/sapp-api</a>
+                    <a href="https://github.com/svenluijten/sapp-api" target="_blank">The repository</a>
                 </div>
             </div>
         </div>
