@@ -52,7 +52,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title">School App</div>
                 <div class="sub-title">
                     <a href="https://github.com/svenluijten/sapp-api" target="_blank">The repository</a>
                 </div>
