@@ -4,6 +4,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function() {
         return view('welcome');
     });
+
+    /**
+     * /app/docs
+     *     - The documentation for the mobile app
+     *     - Usage, installation, splash page...
+     *
+     * /api/docs
+     *     - Developer docs
+     *     - Usage, registering as developer...
+     *     - Installation
+     */
 });
 
 Route::group(['middleware' => ['api'], 'prefix' => 'api', 'namespace' => 'Api'], function() {
