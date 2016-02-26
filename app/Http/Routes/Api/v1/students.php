@@ -12,4 +12,9 @@ Route::group(['prefix' => 'students'], function() {
         'as' => 'students.show',
     ]);
 
+    Route::post('/', [
+        'uses' => 'StudentsController@store',
+        'as' => 'students.store',
+    ]);
+
 });
