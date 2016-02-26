@@ -15,6 +15,9 @@ Route::group(['middleware' => ['web']], function () {
      *     - Usage, registering as developer...
      *     - Installation
      */
+    Route::get('create/{role}', function($role) {
+        \Bouncer::allow($role)->to('create', \App\Group::class);
+    });
 });
 
 Route::group(['middleware' => ['api'], 'prefix' => 'api', 'namespace' => 'Api'], function() {

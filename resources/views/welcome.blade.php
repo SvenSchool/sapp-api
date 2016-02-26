@@ -54,7 +54,7 @@
             <div class="content">
                 <div class="title">School App</div>
                 <div class="sub-title">
-                    <a href="https://github.com/svenluijten/sapp-api" target="_blank">The repository</a>
+                    <a href="https://github.com/svenluijten/sapp-api" target="_blank">The REPOSITORY</a>
                 </div>
             </div>
         </div>
