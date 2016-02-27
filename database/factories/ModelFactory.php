@@ -18,5 +18,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'insertion' => $faker->optional()->suffix,
         'last_name' => $faker->lastName,
         'password' => bcrypt('hello123'),
+        'type_id' => $faker->numberBetween(1, 3),
+    ];
+});
+
+$factory->define(App\Type::class, function(Faker\Generator $faker) {
+    return [
+        'title' => strtolower($faker->name),
+        'name' => $faker->name,
     ];
 });
