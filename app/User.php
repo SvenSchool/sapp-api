@@ -28,24 +28,11 @@ class User extends Authenticatable
              . $this->last_name;
     }
 
-    /**
-     * Prepend the insertion with a space.
-     *
-     * @return string
-     */
     public function getInsertionAttribute()
     {
-        return ' ' . $this->attributes['insertion'];
-    }
+        $insertion = $this->attributes['insertion'];
 
-    /**
-     * Prepend the last name with a space.
-     *
-     * @return string
-     */
-    public function getLastNameAttribute()
-    {
-        return ' ' . $this->attributes['last_name'];
+        return ! $insertion ? ' ' : " $insertion ";
     }
 
     /**
