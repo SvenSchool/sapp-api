@@ -13,7 +13,7 @@ class ApiController extends Controller
     /**
      * @var integer
      */
-    protected $statusCode = 200;
+    private $statusCode = 200;
 
     /**
      * @var integer
@@ -37,9 +37,23 @@ class ApiController extends Controller
      *
      * @return integer
      */
-    protected function getStatusCode()
+    private function getStatusCode()
     {
         return $this->statusCode;
+    }
+
+    /**
+     * Create a response to give back to the user.
+     *
+     * @param  mixed  $data
+     * @param  array  $headers
+     * @return \Illuminate\Http\Response
+     */
+    public function respond($data = null, $headers = [])
+    {
+        if (! $data) return $this;
+
+        return $this->response->make($data, $this->getStatusCode(), $headers);
     }
 
     /**
@@ -48,7 +62,7 @@ class ApiController extends Controller
      * @param  string $message
      * @return \Illuminate\Http\Response
      */
-    public function notFound($message = 'The requested resource could not be found.')
+    protected function notFound($message = 'The requested resource could not be found.')
     {
         return $this->setStatusCode(404)->respond()->withError($message);
     }
@@ -59,7 +73,7 @@ class ApiController extends Controller
      * @param  string $message
      * @return \Illuminate\Http\Response
      */
-    public function internalError($message = 'The server encountered an internal error while processing your request.')
+    protected function internalError($message = 'The server encountered an internal error while processing your request.')
     {
         return $this->setStatusCode(500)->respond()->withError($message);
     }
@@ -70,7 +84,7 @@ class ApiController extends Controller
      * @param  string $message
      * @return \Illuminate\Http\Response
      */
-    public function notAuthorized($message = 'You are not authorized to make this request.')
+    protected function notAuthorized($message = 'You are not authorized to make this request.')
     {
         return $this->setStatusCode(401)->respond()->withError($message);
     }
@@ -96,21 +110,7 @@ class ApiController extends Controller
     }
 
     /**
-     * Create a response to give back to the user.
-     *
-     * @param  mixed  $data
-     * @param  array  $headers
-     * @return \Illuminate\Http\Response
-     */
-    public function respond($data = null, $headers = [])
-    {
-        if (! $data) return $this;
-
-        return $this->response->make($data, $this->getStatusCode(), $headers);
-    }
-
-    /**
-     * Respond with an error.
+     * Respond with a generic error.
      *
      * @param  string $message
      * @return \Illuminate\Http\Response
