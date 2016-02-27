@@ -147,10 +147,10 @@ class ApiResponse
     {
         return array_merge($data, [
             'paginator' => [
-                'total_count'   => $items->total(),
-                'total_pages'   => ceil( $items->total() / $items->perPage() ),
-                'current_page'  => $items->currentPage(),
-                'next_page'     => $items->appends( $this->request->except('page') )->nextPageUrl(),
+                'total_count' => $items->total(),
+                'total_pages' => ceil( $items->total() / $items->perPage() ),
+                'current_page' => $items->currentPage(),
+                'next_page' => $items->appends( $this->request->except('page') )->nextPageUrl(),
                 'previous_page' => $items->appends( $this->request->except('page') )->previousPageUrl(),
             ],
         ]);
