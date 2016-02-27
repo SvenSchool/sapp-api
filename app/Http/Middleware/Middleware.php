@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Tymon\JWTAuth\JWTAuth;
 use App\Utilities\ApiResponse;
-use Illuminate\Contracts\Events\Dispatcher;
 
 class Middleware
 {
