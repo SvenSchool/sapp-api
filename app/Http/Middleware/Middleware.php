@@ -14,11 +14,6 @@ class Middleware
     protected $response;
 
     /**
-     * @var \Illuminate\Contracts\Events\Dispatcher
-     */
-    protected $events;
-
-    /**
      * @var \Tymon\JWTAuth\JWTAuth
      */
     protected $JWTAuth;
@@ -26,14 +21,12 @@ class Middleware
     /**
      * Create a new BaseMiddleware instance.
      *
-     * @param \App\Utilities\ApiResponse              $response
-     * @param \Illuminate\Contracts\Events\Dispatcher $events
-     * @param \Tymon\JWTAuth\JWTAuth                  $JWTAuth
+     * @param \App\Utilities\ApiResponse $response
+     * @param \Tymon\JWTAuth\JWTAuth $JWTAuth
      */
-    public function __construct(ApiResponse $response, Dispatcher $events, JWTAuth $JWTAuth)
+    public function __construct(ApiResponse $response, JWTAuth $JWTAuth)
     {
         $this->response = $response;
-        $this->events = $events;
         $this->JWTAuth = $JWTAuth;
     }
 
