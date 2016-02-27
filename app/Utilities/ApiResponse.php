@@ -82,9 +82,9 @@ class ApiResponse
      * @param  array  $headers
      * @return \Illuminate\Http\Response
      */
-    public function make(...$parameters)
+    public function make($data = null, $headers = [])
     {
-        return $this->respond($parameters);
+        return $this->respond($data, $headers);
     }
 
     /**

@@ -36,8 +36,8 @@ class Middleware
      * @param  mixed
      * @return mixed
      */
-    protected function respond(...$arguments)
+    protected function respond($data = null, $headers = [])
     {
-        return $this->response->make($arguments);
+        return $this->response->make($data, $headers);
     }
 }
