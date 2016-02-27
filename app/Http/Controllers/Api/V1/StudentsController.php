@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateStudent;
+use App\Utilities\ApiResponse;
 use Illuminate\Support\Facades\Response;
 use App\Transformers\Api\StudentTransformer;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -18,20 +18,26 @@ class StudentsController extends ApiController
     protected $studentTransformer;
 
     /**
-     * @var \Illuminate\Contracts\Routing\ResponseFactory
+     * @var \App\Utilities\ApiResponse
      */
     protected $response;
+
+    /**
+     * @var \Illuminate\Http\Request
+     */
+    protected $request;
 
     /**
      * Instantiate the StudentsController.
      *
      * @param StudentTransformer $studentTransformer
-     * @param ResponseFactory $response
+     * @param \App\Utilities\ApiResponse $response
      */
-    public function __construct(StudentTransformer $studentTransformer, ResponseFactory $response)
+    public function __construct(StudentTransformer $studentTransformer, ApiResponse $response, Request $request)
     {
         $this->studentTransformer = $studentTransformer;
         $this->response = $response;
+        $this->request = $request;
 
         $this->middleware('role:teacher,admin', ['except' => ['index', 'show', 'update']]);
         $this->middleware('jwt.auth');
@@ -42,13 +48,11 @@ class StudentsController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $students = User::students()->paginate(
-            $request->get('per_page') ?? $this->perPage
-        );
+        $students = User::students()->paginate( $this->getPerPage() );
 
-        return $this->respond()->withPagination([
+        return $this->response->make()->withPagination([
             'data' => $this->studentTransformer->transformCollection($students->all()),
         ], $students);
     }
@@ -63,9 +67,9 @@ class StudentsController extends ApiController
     {
         $student = User::students()->where('id', $student)->first();
 
-        if (! $student) return $this->respond()->notFound();
+        if (! $student) return $this->response->make()->notFound();
 
-        return $this->respond([
+        return $this->response->make([
             'data' => $this->studentTransformer->transform($student),
         ]);
     }

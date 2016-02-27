@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use JWTAuth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Utilities\ApiResponse;
+use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-class AuthController extends ApiController
+class AuthController extends Controller
 {
     /**
      * @var \Illuminate\Contracts\Routing\ResponseFactory
@@ -20,7 +22,7 @@ class AuthController extends ApiController
      *
      * @param \Illuminate\Contracts\Routing\ResponseFactory $response
      */
-    public function __construct(ResponseFactory $response)
+    public function __construct(ApiResponse $response)
     {
         $this->response = $response;
     }
@@ -37,13 +39,13 @@ class AuthController extends ApiController
 
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return $this->respond()->notAuthorized();
+                return $this->response->make()->notAuthorized();
             }
         } catch (JWTException $e) {
-            return $this->respond()->internalError('Could not create authentication token.');
+            return $this->response->make()->internalError('Could not create authentication token.');
         }
 
-        return $this->respond([
+        return $this->response->make([
             'token' => $token,
         ]);
     }

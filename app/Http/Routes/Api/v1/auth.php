@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'auth'], function() {
 
-    Route::post('auth', [
+    Route::post('/', [
         'uses' => 'AuthController@authenticate',
     ]);
 
