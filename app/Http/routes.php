@@ -21,15 +21,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api', 'namespace' => 'Api'],
 
     Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function() {
 
-        Route::get('auth', [
-            'uses' => 'AuthController@index',
-            'as' => 'auth',
-        ]);
-
-        Route::post('auth', [
-            'uses' => 'AuthController@authenticate',
-        ]);
-
+        require(app_path('Http/Routes/Api/v1/auth.php'));
         require(app_path('Http/Routes/Api/v1/students.php'));
         require(app_path('Http/Routes/Api/v1/boards.php'));
 
