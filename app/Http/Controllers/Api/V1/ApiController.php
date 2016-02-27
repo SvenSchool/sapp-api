@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ApiController extends Controller
 {
@@ -13,6 +14,11 @@ class ApiController extends Controller
      * @var integer
      */
     protected $statusCode = 200;
+
+    /**
+     * @var integer
+     */
+    protected $perPage = 25;
 
     /**
      * Set the status code of the response.
@@ -44,7 +50,7 @@ class ApiController extends Controller
      */
     public function notFound($message = 'The requested resource could not be found.')
     {
-        return $this->setStatusCode(404)->respondWithError($message);
+        return $this->setStatusCode(404)->respond()->withError($message);
     }
 
     /**
@@ -55,7 +61,7 @@ class ApiController extends Controller
      */
     public function internalError($message = 'The server encountered an internal error while processing your request.')
     {
-        return $this->setStatusCode(500)->respondWithError($message);
+        return $this->setStatusCode(500)->respond()->withError($message);
     }
 
     /**
@@ -66,7 +72,27 @@ class ApiController extends Controller
      */
     public function notAuthorized($message = 'You are not authorized to make this request.')
     {
-        return $this->setStatusCode(401)->respondWithError($message);
+        return $this->setStatusCode(401)->respond()->withError($message);
+    }
+
+    /**
+     * Respond with paginated results.
+     *
+     * @param  array $data
+     * @param  \Illuminate\Pagination\LengthAwarePaginator $items
+     * @return array
+     */
+    public function withPagination(array $data, LengthAwarePaginator $items)
+    {
+        return array_merge($data, [
+            'paginator' => [
+                'total_count' => $items->total(),
+                'total_pages' => ceil($items->total() / $items->perPage()),
+                'current_page' => $items->currentPage(),
+                'next_page' => $items->nextPageUrl(),
+                'previous_page' => $items->previousPageUrl(),
+            ],
+        ]);
     }
 
     /**
@@ -89,7 +115,7 @@ class ApiController extends Controller
      * @param  string $message
      * @return \Illuminate\Http\Response
      */
-    private function respondWithError($message)
+    private function withError($message)
     {
         return $this->respond([
             'error' => [
