@@ -15,7 +15,7 @@ class StudentsController extends ApiController
     /**
      * @var \App\Transformers\Api\StudentTransformer
      */
-    protected $studentTransformer;
+    protected $transformer;
 
     /**
      * @var \App\Utilities\ApiResponse
@@ -30,12 +30,12 @@ class StudentsController extends ApiController
     /**
      * Instantiate the StudentsController.
      *
-     * @param StudentTransformer $studentTransformer
+     * @param StudentTransformer $transformer
      * @param \App\Utilities\ApiResponse $response
      */
-    public function __construct(StudentTransformer $studentTransformer, ApiResponse $response, Request $request)
+    public function __construct(StudentTransformer $transformer, ApiResponse $response, Request $request)
     {
-        $this->studentTransformer = $studentTransformer;
+        $this->transformer = $transformer;
         $this->response = $response;
         $this->request = $request;
 
@@ -53,7 +53,7 @@ class StudentsController extends ApiController
         $students = User::students()->paginate( $this->getPerPage() );
 
         return $this->response->make()->withPagination([
-            'data' => $this->studentTransformer->transformCollection($students->all()),
+            'data' => $this->transformer->transformCollection($students->all()),
         ], $students);
     }
 
@@ -70,7 +70,7 @@ class StudentsController extends ApiController
         if (! $student) return $this->response->make()->notFound();
 
         return $this->response->make([
-            'data' => $this->studentTransformer->transform($student),
+            'data' => $this->transformer->transform($student),
         ]);
     }
 

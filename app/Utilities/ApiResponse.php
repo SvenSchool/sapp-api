@@ -24,11 +24,6 @@ class ApiResponse
     private $statusCode = 200;
 
     /**
-     * @var integer
-     */
-    protected $perPage = 25;
-
-    /**
      * Instantiate the ApiResponse.
      *
      * @param \Illuminate\Contracts\Routing\ResponseFactory $response
