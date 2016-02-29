@@ -24,6 +24,7 @@ Route::group(['middleware' => ['api'], 'prefix' => 'api', 'namespace' => 'Api'],
         require(app_path('Http/Routes/Api/v1/auth.php'));
         require(app_path('Http/Routes/Api/v1/students.php'));
         require(app_path('Http/Routes/Api/v1/boards.php'));
+        require(app_path('Http/Routes/Api/v1/groups.php'));
 
     });
 
