@@ -30,8 +30,9 @@ class StudentsController extends ApiController
     /**
      * Instantiate the StudentsController.
      *
-     * @param StudentTransformer $transformer
-     * @param \App\Utilities\ApiResponse $response
+     * @param \App\Transformers\Api\StudentTransformer $transformer
+     * @param \App\Utilities\ApiResponse               $response
+     * @param \Illuminate\Http\Request                 $request
      */
     public function __construct(StudentTransformer $transformer, ApiResponse $response, Request $request)
     {
@@ -39,8 +40,8 @@ class StudentsController extends ApiController
         $this->response = $response;
         $this->request = $request;
 
-        $this->middleware('role:teacher,admin', ['except' => ['index', 'show', 'update']]);
         $this->middleware('jwt.auth');
+        $this->middleware('role:teacher,admin', ['except' => ['index', 'show', 'update']]);
     }
 
     /**
@@ -68,10 +69,5 @@ class StudentsController extends ApiController
         return $this->response->make([
             'data' => $this->transformer->transform($student),
         ]);
-    }
-
-    public function store()
-    {
-        //
     }
 }

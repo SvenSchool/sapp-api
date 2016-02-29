@@ -11,14 +11,14 @@ use App\Transformers\Api\GroupTransformer;
 class GroupsController extends ApiController
 {
     /**
+     * @var \App\Transformers\Api\GroupTransformer
+     */
+    protected $transformer;
+
+    /**
      * @var \App\Utilities\ApiResponse
      */
     protected $response;
-
-    /**
-     * @var GroupTransformer
-     */
-    protected $transformer;
 
     /**
      * @var \Illuminate\Http\Request
@@ -28,12 +28,14 @@ class GroupsController extends ApiController
     /**
      * Instantiate the GroupsController.
      *
-     * @param \App\Utilities\ApiResponse $response
+     * @param \App\Transformers\Api\GroupTransformer $transformer
+     * @param \App\Utilities\ApiResponse             $response
+     * @param \Illuminate\Http\Request               $request
      */
     public function __construct(GroupTransformer $transformer, ApiResponse $response, Request $request)
     {
-        $this->response = $response;
         $this->transformer = $transformer;
+        $this->response = $response;
         $this->request = $request;
 
         $this->middleware('jwt.auth');
@@ -42,7 +44,7 @@ class GroupsController extends ApiController
     /**
      * Show all groups.
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Utilities\ApiResponse
      */
     public function index()
     {
@@ -56,7 +58,7 @@ class GroupsController extends ApiController
     /**
      * Show one group.
      *
-     * @param  integer $group
+     * @param  \App\Group $group
      * @return \App\Utilities\ApiResponse
      */
     public function show(Group $group)
