@@ -19,6 +19,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'last_name' => $faker->lastName,
         'password' => bcrypt('hello123'),
         'type_id' => $faker->numberBetween(1, 3),
+        'group_id' => $faker->numberBetween(1, 10),
     ];
 });
 
@@ -26,5 +27,11 @@ $factory->define(App\Type::class, function(Faker\Generator $faker) {
     return [
         'title' => strtolower($faker->name),
         'name' => $faker->name,
+    ];
+});
+
+$factory->define(App\Group::class, function(Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
     ];
 });

@@ -14,6 +14,7 @@ class User extends Authenticatable
         'last_name',
         'insertion',
         'type_id',
+        'group_id',
     ];
 
     /**

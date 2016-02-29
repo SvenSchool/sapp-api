@@ -25,6 +25,13 @@ class CreateUsersTable extends Migration
             $table->string('insertion')->nullable();
             $table->string('last_name');
 
+            // The group the user is in
+            $table->integer('group_id')->unsigned();
+            $table->foreign('group_id')
+                  ->references('id')
+                  ->on('groups')
+                  ->onDelete('cascade');
+
             // The user type
             $table->integer('type_id')->unsigned()->index();
             $table->foreign('type_id')
