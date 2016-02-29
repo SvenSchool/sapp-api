@@ -15,6 +15,7 @@ class GroupTransformer extends Transformer
     public function transform($group)
     {
         return [
+            'id' => $group['id'],
             'name' => $group['name'],
         ];
     }
