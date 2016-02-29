@@ -24,7 +24,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        // ...
+        $router->bind('group', function($value) {
+            return \App\Group::active()
+                             ->where('id', $value)
+                             ->first();
+        });
+
+        $router->bind('student', function($value) {
+            return \App\User::students()
+                            ->where('id', $value)
+                            ->first();
+        });
 
         parent::boot($router);
     }

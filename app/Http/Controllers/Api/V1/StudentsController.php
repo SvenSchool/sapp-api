@@ -60,15 +60,11 @@ class StudentsController extends ApiController
     /**
      * Show a specified resource.
      *
-     * @param  integer $student
+     * @param  \App\User $student
      * @return \Illuminate\Http\Response
      */
-    public function show($student)
+    public function show(User $student)
     {
-        $student = User::students()->where('id', $student)->first();
-
-        if (! $student) return $this->response->make()->notFound();
-
         return $this->response->make([
             'data' => $this->transformer->transform($student),
         ]);

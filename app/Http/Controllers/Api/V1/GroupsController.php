@@ -46,7 +46,7 @@ class GroupsController extends ApiController
      */
     public function index()
     {
-        $groups = Group::paginate( $this->getPerPage() );
+        $groups = Group::active()->paginate( $this->getPerPage() );
 
         return $this->response->make()->withPagination([
             'data' => $this->transformer->transformCollection($groups->all()),
