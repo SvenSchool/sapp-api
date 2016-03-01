@@ -16,7 +16,6 @@ $ composer install
 
 # Set up .env file & generate encryption key
 $ cp .env.example .env
-$ php artisan key:generate
 ```
 
 Next, edit your `.env` file you just created however you wish. Make sure to generate
@@ -29,18 +28,24 @@ $ php artisan jwt:generate
 ```
 
 **NOTE:**
-The JWT secret will generate in `config/jwt.php`, I recommend copying it from that
-file into your `.env` file to make sure the key does not get copied over to your
-production environment or gets checked into version control.
+> The JWT secret will generate in `config/jwt.php`, I recommend copying it from
+> that file into your `.env` file to make sure the key does not get copied over
+> to your production environment or gets checked into version control.
+
+Once that's done, you can go ahead and run the migrations and seed the database:
+
+```bash
+$ php artisan migrate:refresh --seed
+```
 
 Your development suite is now set up! Start up a server in your favorite local
 development setup (we use [Homestead](https://laravel.com/docs/5.2/homestead))
 or simply boot up a server with the `php artisan serve` command.
 
 **NOTE:**
-PHP 7 or higher is required to set up this API. You will not be able to run it on
-a 5.5 or 5.6 PHP installation. We highly recommend setting up [Homestead](https://laravel.com/docs/5.2/homestead)
-for your own comfort and peace of mind.
+> PHP 7 or higher is required to set up this API. You will not be able to run it
+> on PHP 5.5 or 5.6. We highly recommend setting up [Homestead](https://laravel.com/docs/5.2/homestead)
+> for your own comfort and peace of mind.
 
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
