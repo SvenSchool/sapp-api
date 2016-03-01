@@ -19,7 +19,7 @@ class ApiController extends Controller
      */
     protected function getPerPage($max = 50)
     {
-        $perPage = $this->request->get('per_page');
+        $perPage = app('request')->get('per_page');
 
         return $perPage ? ($perPage > $max ? $max : $perPage) : $this->perPage;
     }

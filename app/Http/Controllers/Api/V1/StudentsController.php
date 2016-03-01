@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\User;
 use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\Utilities\ApiResponse;
-use Illuminate\Support\Facades\Response;
 use App\Transformers\Api\StudentTransformer;
-use Illuminate\Contracts\Routing\ResponseFactory;
 
 class StudentsController extends ApiController
 {
@@ -23,22 +20,15 @@ class StudentsController extends ApiController
     protected $response;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
      * Instantiate the StudentsController.
      *
      * @param \App\Transformers\Api\StudentTransformer $transformer
      * @param \App\Utilities\ApiResponse               $response
-     * @param \Illuminate\Http\Request                 $request
      */
-    public function __construct(StudentTransformer $transformer, ApiResponse $response, Request $request)
+    public function __construct(StudentTransformer $transformer, ApiResponse $response)
     {
         $this->transformer = $transformer;
         $this->response = $response;
-        $this->request = $request;
 
         $this->middleware('jwt.auth');
         $this->middleware('role:teacher,admin', ['except' => ['index', 'show', 'update']]);
