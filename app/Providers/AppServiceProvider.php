@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+       $this->app->singleton('api', function($app) {
+            return new \App\Utilities\ApiResponse(
+                $app['Illuminate\Routing\ResponseFactory'],
+                $app['Illuminate\Http\Request']
+            );
+        });
     }
 }
