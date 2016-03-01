@@ -14,7 +14,7 @@ $ cd sapp-api
 # Install composer dependencies
 $ composer install
 
-# Set up .env file & generate encryption key
+# Create a new .env file
 $ cp .env.example .env
 ```
 
